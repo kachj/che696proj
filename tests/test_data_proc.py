@@ -49,7 +49,7 @@ def silent_remove(filename, disable=False):
                 raise
 
 
-class TestMain_csv(unittest.TestCase):
+class TestMainCsv(unittest.TestCase):
     # These tests make sure that the program can run properly from main
     def testSampleData(self):
         # Checks that runs with defaults and that files are created
@@ -68,7 +68,7 @@ class TestMain_csv(unittest.TestCase):
             silent_remove(DEF_CSV_PNG_OUT, disable=DISABLE_REMOVE)
 
 
-class TestMain_excel(unittest.TestCase):
+class TestMainExcel(unittest.TestCase):
     # These tests make sure that the program can run properly from main
     def testSampleData(self):
         # Checks that runs with defaults and that files are created
@@ -88,6 +88,7 @@ class TestMain_excel(unittest.TestCase):
 
 
 class TestMainFailWell(unittest.TestCase):
+    # tests for failure when nonexistant file is called
     def testMissingFile(self):
         test_input = ["-c", "ghost.txt"]
         if logger.isEnabledFor(logging.DEBUG):
@@ -96,8 +97,9 @@ class TestMainFailWell(unittest.TestCase):
             self.assertTrue("ghost.txt" in output)
 
 
-class TestDataAnalysis_csv(unittest.TestCase):
-    def testSampleData_csv(self):
+class TestDataAnalysisCsv(unittest.TestCase):
+    # Tests that csv_data_analysis returns expected result
+    def testSampleDataCsv(self):
 
         csv_analysis_results = csv_data_analysis(SAMPLE_CSV_DATA_FILE_LOC)
         csv_expected_results = pd.read_csv(filepath_or_buffer=os.path.join(TEST_DATA_DIR,
@@ -105,8 +107,9 @@ class TestDataAnalysis_csv(unittest.TestCase):
         self.assertTrue(np.allclose(csv_analysis_results.values, csv_expected_results.values))
 
 
-class TestDataAnalysis_excel(unittest.TestCase):
-    def testSampleData_excel(self):
+class TestDataAnalysisExcel(unittest.TestCase):
+    # Tests that excel_data_analysis returns expected result
+    def testSampleDataExcel(self):
 
         excel_analysis_results_whole = excel_data_analysis(SAMPLE_EXCEL_DATA_FILE_LOC)
         number = np.random.randint(0, int(len(excel_analysis_results_whole)/3))
