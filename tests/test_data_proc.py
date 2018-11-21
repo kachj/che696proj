@@ -105,7 +105,7 @@ class TestDataAnalysis_csv(unittest.TestCase):
         self.assertTrue(np.allclose(csv_analysis_results.values, csv_expected_results.values))
 
 
-class TestCalcConcat_excel(unittest.TestCase):
+class TestDataAnalysis_excel(unittest.TestCase):
     def testSampleData_excel(self):
 
         excel_analysis_results_whole = excel_data_analysis(SAMPLE_EXCEL_DATA_FILE_LOC)
